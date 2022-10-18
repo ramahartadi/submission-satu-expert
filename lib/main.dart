@@ -7,6 +7,7 @@ import 'package:ditonton/presentation/pages/popular_movies_page.dart';
 import 'package:ditonton/presentation/pages/search_page.dart';
 import 'package:ditonton/presentation/pages/top_rated_movies_page.dart';
 import 'package:ditonton/presentation/pages/tvshow/home_tvshow_page.dart';
+import 'package:ditonton/presentation/pages/tvshow/on_the_air_tvshows_page.dart';
 import 'package:ditonton/presentation/pages/tvshow/popular_tvshows_page.dart';
 import 'package:ditonton/presentation/pages/tvshow/search_page_tvshow.dart';
 import 'package:ditonton/presentation/pages/tvshow/top_rated_tvshows_page.dart';
@@ -18,6 +19,7 @@ import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
 import 'package:ditonton/presentation/provider/popular_movies_notifier.dart';
 import 'package:ditonton/presentation/provider/top_rated_movies_notifier.dart';
+import 'package:ditonton/presentation/provider/tvshow/on_the_air_tvshows_notifier.dart';
 import 'package:ditonton/presentation/provider/tvshow/popular_tvshows_notifier.dart';
 import 'package:ditonton/presentation/provider/tvshow/top_rated_tvshows_notifier.dart';
 import 'package:ditonton/presentation/provider/tvshow/tvshow_detail_notifier.dart';
@@ -68,6 +70,9 @@ class MyApp extends StatelessWidget {
           create: (_) => di.locator<TvshowSearchNotifier>(),
         ),
         ChangeNotifierProvider(
+          create: (_) => di.locator<OnTheAirTvshowsNotifier>(),
+        ),
+        ChangeNotifierProvider(
           create: (_) => di.locator<TopRatedTvshowsNotifier>(),
         ),
         ChangeNotifierProvider(
@@ -113,6 +118,8 @@ class MyApp extends StatelessWidget {
               return MaterialPageRoute(builder: (_) => WatchlistTvshowsPage());
             case AboutPage.ROUTE_NAME:
               return MaterialPageRoute(builder: (_) => AboutPage());
+            case OnTheAirTvshowsPage.ROUTE_NAME:
+              return CupertinoPageRoute(builder: (_) => OnTheAirTvshowsPage());
             case PopularTvshowsPage.ROUTE_NAME:
               return CupertinoPageRoute(builder: (_) => PopularTvshowsPage());
             case TopRatedTvshowsPage.ROUTE_NAME:

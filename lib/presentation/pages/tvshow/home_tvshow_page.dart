@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../watchlist_movies_page.dart';
+import 'on_the_air_tvshows_page.dart';
 
 class HomeTvshowPage extends StatefulWidget {
   static const ROUTE_NAME = '/home-tvshow';
@@ -99,9 +100,10 @@ class _HomeTvshowPageState extends State<HomeTvshowPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'On The Air Tv Series',
-                style: kHeading6,
+              _buildSubHeading(
+                title: 'On The Air Tv Series',
+                onTap: () => Navigator.pushNamed(
+                    context, OnTheAirTvshowsPage.ROUTE_NAME),
               ),
               Consumer<TvshowListNotifier>(builder: (context, data, child) {
                 final state = data.onTheAirTvshowsState;
