@@ -1,7 +1,7 @@
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/domain/entities/tvshow/tvshow.dart';
-import 'package:ditonton/presentation/pages/tvshow/popular_tvshows_page.dart';
-import 'package:ditonton/presentation/provider/tvshow/popular_tvshows_notifier.dart';
+import 'package:core/utils/state_enum.dart';
+import 'package:core/domain/entities/tvshow/tvshow.dart';
+import 'package:core/presentation/pages/tvshow/popular_tvshows_page.dart';
+import 'package:core/presentation/provider/tvshow/popular_tvshows_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';

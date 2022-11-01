@@ -1,7 +1,7 @@
-import 'package:ditonton/data/models/tvshow/tvshow_table.dart';
-import 'package:ditonton/domain/entities/genre.dart';
-import 'package:ditonton/domain/entities/tvshow/tvshow.dart';
-import 'package:ditonton/domain/entities/tvshow/tvshow_detail.dart';
+import 'package:core/data/models/tvshow/tvshow_table.dart';
+import 'package:core/domain/entities/genre.dart';
+import 'package:core/domain/entities/tvshow/tvshow.dart';
+import 'package:core/domain/entities/tvshow/tvshow_detail.dart';
 
 final testTvshow = Tvshow(
     posterPath: "/vC324sdfcS313vh9QXwijLIHPJp.jpg",

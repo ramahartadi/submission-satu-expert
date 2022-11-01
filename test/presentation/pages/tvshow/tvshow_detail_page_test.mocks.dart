@@ -6,19 +6,18 @@
 import 'dart:async' as _i11;
 import 'dart:ui' as _i12;
 
-import 'package:ditonton/common/state_enum.dart' as _i9;
-import 'package:ditonton/domain/entities/tvshow/tvshow.dart' as _i10;
-import 'package:ditonton/domain/entities/tvshow/tvshow_detail.dart' as _i7;
-import 'package:ditonton/domain/usecases/tvshow/get_tvshow_detail.dart' as _i2;
-import 'package:ditonton/domain/usecases/tvshow/get_tvshow_recommendations.dart'
+import 'package:core/utils/state_enum.dart' as _i9;
+import 'package:core/domain/entities/tvshow/tvshow.dart' as _i10;
+import 'package:core/domain/entities/tvshow/tvshow_detail.dart' as _i7;
+import 'package:core/domain/usecases/tvshow/get_tvshow_detail.dart' as _i2;
+import 'package:core/domain/usecases/tvshow/get_tvshow_recommendations.dart'
     as _i3;
-import 'package:ditonton/domain/usecases/tvshow/get_watchlist_status_tvshows.dart'
+import 'package:core/domain/usecases/tvshow/get_watchlist_status_tvshows.dart'
     as _i4;
-import 'package:ditonton/domain/usecases/tvshow/remove_watchlist_tvshow.dart'
+import 'package:core/domain/usecases/tvshow/remove_watchlist_tvshow.dart'
     as _i6;
-import 'package:ditonton/domain/usecases/tvshow/save_watchlist_tvshow.dart'
-    as _i5;
-import 'package:ditonton/presentation/provider/tvshow/tvshow_detail_notifier.dart'
+import 'package:core/domain/usecases/tvshow/save_watchlist_tvshow.dart' as _i5;
+import 'package:core/presentation/provider/tvshow/tvshow_detail_notifier.dart'
     as _i8;
 import 'package:mockito/mockito.dart' as _i1;
 

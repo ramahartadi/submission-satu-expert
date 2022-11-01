@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
-import 'package:ditonton/common/failure.dart';
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/domain/entities/tvshow/tvshow.dart';
-import 'package:ditonton/domain/usecases/tvshow/get_popular_tvshows.dart';
-import 'package:ditonton/presentation/provider/tvshow/popular_tvshows_notifier.dart';
+import 'package:core/utils/failure.dart';
+import 'package:core/utils/state_enum.dart';
+import 'package:core/domain/entities/tvshow/tvshow.dart';
+import 'package:core/domain/usecases/tvshow/get_popular_tvshows.dart';
+import 'package:core/presentation/provider/tvshow/popular_tvshows_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
