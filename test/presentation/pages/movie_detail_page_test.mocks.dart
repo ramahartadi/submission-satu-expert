@@ -7,14 +7,14 @@ import 'dart:async' as _i11;
 import 'dart:ui' as _i12;
 
 import 'package:core/utils/state_enum.dart' as _i9;
-import 'package:core/domain/entities/movie.dart' as _i10;
-import 'package:core/domain/entities/movie_detail.dart' as _i7;
-import 'package:core/domain/usecases/get_movie_detail.dart' as _i2;
-import 'package:core/domain/usecases/get_movie_recommendations.dart' as _i3;
-import 'package:core/domain/usecases/get_watchlist_status.dart' as _i4;
-import 'package:core/domain/usecases/remove_watchlist.dart' as _i6;
-import 'package:core/domain/usecases/save_watchlist.dart' as _i5;
-import 'package:core/presentation/provider/movie_detail_notifier.dart' as _i8;
+import 'package:movies/domain/entities/movie.dart' as _i10;
+import 'package:movies/domain/entities/movie_detail.dart' as _i7;
+import 'package:movies/domain/usecases/get_movie_detail.dart' as _i2;
+import 'package:movies/domain/usecases/get_movie_recommendations.dart' as _i3;
+import 'package:movies/domain/usecases/get_watchlist_status.dart' as _i4;
+import 'package:movies/domain/usecases/remove_watchlist.dart' as _i6;
+import 'package:movies/domain/usecases/save_watchlist.dart' as _i5;
+import 'package:movies/presentation/provider/movie_detail_notifier.dart' as _i8;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint

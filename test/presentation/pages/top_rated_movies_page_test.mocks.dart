@@ -6,9 +6,9 @@
 import 'dart:async' as _i6;
 import 'dart:ui' as _i7;
 
-import 'package:core/domain/entities/movie.dart' as _i5;
-import 'package:core/domain/usecases/get_top_rated_movies.dart' as _i2;
-import 'package:core/presentation/provider/top_rated_movies_notifier.dart'
+import 'package:movies/domain/entities/movie.dart' as _i5;
+import 'package:movies/domain/usecases/get_top_rated_movies.dart' as _i2;
+import 'package:movies/presentation/provider/top_rated_movies_notifier.dart'
     as _i3;
 import 'package:core/utils/state_enum.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;

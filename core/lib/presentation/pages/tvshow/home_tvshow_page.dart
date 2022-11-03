@@ -10,7 +10,6 @@ import 'package:core/presentation/pages/tvshow/watchlist_tvshows_page.dart';
 import 'package:core/presentation/provider/tvshow/tvshow_list_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../watchlist_movies_page.dart';
 import 'on_the_air_tvshows_page.dart';
 
 class HomeTvshowPage extends StatefulWidget {
@@ -61,7 +60,7 @@ class _HomeTvshowPageState extends State<HomeTvshowPage> {
               leading: Icon(Icons.save_alt),
               title: Text('Watchlist'),
               onTap: () {
-                Navigator.pushNamed(context, WatchlistMoviesPage.ROUTE_NAME);
+                Navigator.pushNamed(context, WatchlistTvshowsPage.ROUTE_NAME);
               },
             ),
             ListTile(

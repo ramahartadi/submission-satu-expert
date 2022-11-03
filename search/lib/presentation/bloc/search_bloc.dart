@@ -1,4 +1,4 @@
-import 'package:core/domain/entities/movie.dart';
+import 'package:movies/domain/entities/movie.dart';
 import 'package:search/search.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';

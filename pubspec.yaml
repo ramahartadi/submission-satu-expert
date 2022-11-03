@@ -44,7 +44,13 @@ dependencies:
     path: core
   search:
     path: search
+  movies:
+    path: movies
+  tvshows:
+    path: tvshows
   flutter_bloc: ^8.0.0
+  firebase_core: ^2.1.1
+  firebase_crashlytics: ^3.0.3
 
 dev_dependencies:
   mockito: ^5.0.8
