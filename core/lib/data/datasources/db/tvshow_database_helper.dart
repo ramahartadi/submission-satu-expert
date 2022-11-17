@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:core/data/models/tvshow/tvshow_table.dart';
+import 'package:tvshows/data/models/tvshow_table.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelperTvshow {

@@ -7,8 +7,8 @@ import 'package:core/utils/routes.dart';
 import '../../presentation/pages/movie_detail_page.dart';
 import '../../presentation/pages/popular_movies_page.dart';
 import '../../presentation/pages/top_rated_movies_page.dart';
-import 'package:core/presentation/pages/tvshow/home_tvshow_page.dart';
-import 'package:core/presentation/pages/tvshow/watchlist_tvshows_page.dart';
+// import 'package:core/presentation/pages/tvshow/home_tvshow_page.dart';
+// import 'package:core/presentation/pages/tvshow/watchlist_tvshows_page.dart';
 import '../../presentation/pages/watchlist_movies_page.dart';
 // import '../../presentation/provider/movie_list_notifier.dart';
 import 'package:flutter/material.dart';
@@ -62,7 +62,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               leading: Icon(Icons.live_tv),
               title: Text('Tv Shows'),
               onTap: () {
-                Navigator.pushNamed(context, HomeTvshowPage.ROUTE_NAME);
+                Navigator.pushNamed(context, TVSHOW_HOME_ROUTE);
               },
             ),
             ListTile(
@@ -76,7 +76,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               leading: Icon(Icons.download_for_offline_outlined),
               title: Text('Watchlist Tvshow'),
               onTap: () {
-                Navigator.pushNamed(context, WatchlistTvshowsPage.ROUTE_NAME);
+                Navigator.pushNamed(context, TVSHOW_WATCHLIST_ROUTE);
               },
             ),
             ListTile(

@@ -17,6 +17,8 @@ dependencies:
   rxdart: ^0.27.1
   movies:
     path: ../movies
+  tvshows:
+    path: ../tvshows
 
 dev_dependencies:
   flutter_test:

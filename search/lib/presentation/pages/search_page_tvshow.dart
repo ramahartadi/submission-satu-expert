@@ -1,6 +1,6 @@
 import 'package:core/core.dart';
 // import 'package:core/presentation/provider/tvshow/tvshow_search_notifier.dart';
-import 'package:core/presentation/widgets/tvshow_card_list.dart';
+import 'package:tvshows/presentation/widgets/tvshow_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

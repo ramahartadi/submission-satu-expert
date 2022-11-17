@@ -1,4 +1,4 @@
-import 'package:core/domain/entities/tvshow/tvshow.dart';
+import 'package:tvshows/domain/entities/tvshow.dart';
 import 'package:equatable/equatable.dart';
 import 'package:movies/domain/entities/movie.dart';
 
