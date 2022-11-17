@@ -1,5 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
+import 'package:movies/presentation/bloc/list_movies/list_movies_event.dart';
+import 'package:movies/presentation/bloc/list_movies/now_playing_movies_bloc.dart';
 import '../../domain/entities/movie.dart';
 import 'package:core/utils/routes.dart';
 import '../../presentation/pages/movie_detail_page.dart';
@@ -8,9 +10,14 @@ import '../../presentation/pages/top_rated_movies_page.dart';
 import 'package:core/presentation/pages/tvshow/home_tvshow_page.dart';
 import 'package:core/presentation/pages/tvshow/watchlist_tvshows_page.dart';
 import '../../presentation/pages/watchlist_movies_page.dart';
-import '../../presentation/provider/movie_list_notifier.dart';
+// import '../../presentation/provider/movie_list_notifier.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+// import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../bloc/list_movies/list_movies_state.dart';
+import '../bloc/list_movies/popular_movies_bloc.dart';
+import '../bloc/list_movies/top_rated_movies_bloc.dart';
 
 class HomeMoviePage extends StatefulWidget {
   @override
@@ -21,11 +28,14 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(
-        () => Provider.of<MovieListNotifier>(context, listen: false)
-          ..fetchNowPlayingMovies()
-          ..fetchPopularMovies()
-          ..fetchTopRatedMovies());
+    Future.microtask(() {
+      BlocProvider.of<NowPlayingMoviesBloc>(context, listen: false)
+          .add(OnListMoviesCalled());
+      BlocProvider.of<TopRatedMoviesBloc>(context, listen: false)
+          .add(OnListMoviesCalled());
+      BlocProvider.of<PopularMoviesBloc>(context, listen: false)
+          .add(OnListMoviesCalled());
+    });
   }
 
   @override
@@ -100,52 +110,68 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                 'Now Playing Movies',
                 style: kHeading6,
               ),
-              Consumer<MovieListNotifier>(builder: (context, data, child) {
-                final state = data.nowPlayingState;
-                if (state == RequestState.Loading) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state == RequestState.Loaded) {
-                  return MovieList(data.nowPlayingMovies);
-                } else {
-                  return Text('Failed');
-                }
-              }),
+              BlocBuilder<NowPlayingMoviesBloc, MoviesState>(
+                builder: (context, state) {
+                  if (state is MoviesLoading) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (state is MoviesHasData) {
+                    final data = state.result;
+                    return MovieList(data);
+                  } else if (state is MoviesError) {
+                    return Text(state.message);
+                  } else {
+                    return const Center();
+                  }
+                },
+              ),
               _buildSubHeading(
                 title: 'Popular',
                 onTap: () =>
                     Navigator.pushNamed(context, PopularMoviesPage.ROUTE_NAME),
               ),
-              Consumer<MovieListNotifier>(builder: (context, data, child) {
-                final state = data.popularMoviesState;
-                if (state == RequestState.Loading) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state == RequestState.Loaded) {
-                  return MovieList(data.popularMovies);
-                } else {
-                  return Text('Failed');
-                }
-              }),
+              BlocBuilder<PopularMoviesBloc, MoviesState>(
+                builder: (context, state) {
+                  if (state is MoviesLoading) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (state is MoviesHasData) {
+                    final data = state.result;
+                    return MovieList(data);
+                  } else if (state is MoviesError) {
+                    return Text(state.message);
+                  } else {
+                    return Center(
+                      child: Text('Empty'),
+                    );
+                  }
+                },
+              ),
               _buildSubHeading(
                 title: 'Top Rated',
                 onTap: () =>
                     Navigator.pushNamed(context, TopRatedMoviesPage.ROUTE_NAME),
               ),
-              Consumer<MovieListNotifier>(builder: (context, data, child) {
-                final state = data.topRatedMoviesState;
-                if (state == RequestState.Loading) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state == RequestState.Loaded) {
-                  return MovieList(data.topRatedMovies);
-                } else {
-                  return Text('Failed');
-                }
-              }),
+              BlocBuilder<TopRatedMoviesBloc, MoviesState>(
+                builder: (context, state) {
+                  if (state is MoviesLoading) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (state is MoviesHasData) {
+                    final data = state.result;
+                    return MovieList(data);
+                  } else if (state is MoviesError) {
+                    return Text(state.message);
+                  } else {
+                    return Center(
+                      child: Text('Empty'),
+                    );
+                  }
+                },
+              ),
             ],
           ),
         ),
