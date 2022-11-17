@@ -1,8 +1,13 @@
 import 'package:core/utils/state_enum.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tvshows/presentation/provider/popular_tvshows_notifier.dart';
 import 'package:tvshows/presentation/widgets/tvshow_card_list.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+
+import '../bloc/list_tvshows/list_tvshows_event.dart';
+import '../bloc/list_tvshows/list_tvshows_state.dart';
+import '../bloc/list_tvshows/popular_tvshows_bloc.dart';
+// import 'package:provider/provider.dart';
 
 class PopularTvshowsPage extends StatefulWidget {
   static const ROUTE_NAME = '/popular-tvshow';
@@ -15,9 +20,9 @@ class _PopularTvshowsPageState extends State<PopularTvshowsPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() =>
-        Provider.of<PopularTvshowsNotifier>(context, listen: false)
-            .fetchPopularTvshows());
+    Future.microtask(() {
+      BlocProvider.of<PopularTvshowsBloc>(context).add(OnListTvshowsCalled());
+    });
   }
 
   @override
@@ -28,24 +33,25 @@ class _PopularTvshowsPageState extends State<PopularTvshowsPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<PopularTvshowsNotifier>(
-          builder: (context, data, child) {
-            if (data.state == RequestState.Loading) {
+        child: BlocBuilder<PopularTvshowsBloc, TvshowsState>(
+          builder: (context, state) {
+            if (state is TvshowsLoading) {
               return Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (data.state == RequestState.Loaded) {
+            } else if (state is TvshowsHasData) {
+              final tvshows = state.result;
               return ListView.builder(
                 itemBuilder: (context, index) {
-                  final tvshow = data.tvshows[index];
+                  final tvshow = tvshows[index];
                   return TvshowCard(tvshow);
                 },
-                itemCount: data.tvshows.length,
+                itemCount: tvshows.length,
               );
             } else {
               return Center(
-                key: Key('error_message'),
-                child: Text(data.message),
+                key: const Key('error_message'),
+                child: Text((state as TvshowsError).message),
               );
             }
           },

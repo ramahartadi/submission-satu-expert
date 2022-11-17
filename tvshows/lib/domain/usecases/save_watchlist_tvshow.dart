@@ -3,10 +3,10 @@ import 'package:core/utils/failure.dart';
 import '../entities/tvshow_detail.dart';
 import '../repositories/tvshow_repository.dart';
 
-class SaveWatchlistTvshow {
+class SaveWatchlistTv {
   final TvshowRepository repository;
 
-  SaveWatchlistTvshow(this.repository);
+  SaveWatchlistTv(this.repository);
 
   Future<Either<Failure, String>> execute(TvshowDetail tvshow) {
     return repository.saveWatchlistTvshow(tvshow);

@@ -134,7 +134,7 @@ class DetailContent extends StatelessWidget {
                                 if (!isAddedWatchlist) {
                                   BlocProvider.of<WatchListMovieBloc>(context,
                                           listen: false)
-                                      .add(SaveWatchistMovie(movie));
+                                      .add(SaveWatchlistMovie(movie));
                                 } else {
                                   BlocProvider.of<WatchListMovieBloc>(context,
                                           listen: false)

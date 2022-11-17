@@ -1,5 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tvshows/presentation/bloc/list_tvshows/on_the_air_tvshows_bloc.dart';
+import 'package:tvshows/presentation/bloc/list_tvshows/top_rated_tvshows_bloc.dart';
 import '../../domain/entities/tvshow.dart';
 import 'package:core/utils/routes.dart';
 import 'package:tvshows/presentation/pages/tvshow_detail_page.dart';
@@ -9,7 +12,10 @@ import 'package:tvshows/presentation/pages/top_rated_tvshows_page.dart';
 import 'package:tvshows/presentation/pages/watchlist_tvshows_page.dart';
 import 'package:tvshows/presentation/provider/tvshow_list_notifier.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+// import 'package:provider/provider.dart';
+import '../bloc/list_tvshows/list_tvshows_event.dart';
+import '../bloc/list_tvshows/list_tvshows_state.dart';
+import '../bloc/list_tvshows/popular_tvshows_bloc.dart';
 import 'on_the_air_tvshows_page.dart';
 
 class HomeTvshowPage extends StatefulWidget {
@@ -22,11 +28,14 @@ class _HomeTvshowPageState extends State<HomeTvshowPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(
-        () => Provider.of<TvshowListNotifier>(context, listen: false)
-          ..fetchOnTheAirTvshows()
-          ..fetchPopularTvshows()
-          ..fetchTopRatedTvshows());
+    Future.microtask(() {
+      BlocProvider.of<OnTheAirTvshowsBloc>(context, listen: false)
+          .add(OnListTvshowsCalled());
+      BlocProvider.of<TopRatedTvshowsBloc>(context, listen: false)
+          .add(OnListTvshowsCalled());
+      BlocProvider.of<PopularTvshowsBloc>(context, listen: false)
+          .add(OnListTvshowsCalled());
+    });
   }
 
   @override
@@ -44,7 +53,7 @@ class _HomeTvshowPageState extends State<HomeTvshowPage> {
             ),
             ListTile(
               leading: Icon(Icons.movie),
-              title: Text('Movies'),
+              title: Text('Tvshows'),
               onTap: () {
                 Navigator.pushNamed(context, '/home');
               },
@@ -102,52 +111,68 @@ class _HomeTvshowPageState extends State<HomeTvshowPage> {
                 onTap: () => Navigator.pushNamed(
                     context, OnTheAirTvshowsPage.ROUTE_NAME),
               ),
-              Consumer<TvshowListNotifier>(builder: (context, data, child) {
-                final state = data.onTheAirTvshowsState;
-                if (state == RequestState.Loading) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state == RequestState.Loaded) {
-                  return TvshowList(data.onTheAirTvshows);
-                } else {
-                  return Text('Failed');
-                }
-              }),
+              BlocBuilder<OnTheAirTvshowsBloc, TvshowsState>(
+                builder: (context, state) {
+                  if (state is TvshowsLoading) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (state is TvshowsHasData) {
+                    final data = state.result;
+                    return TvshowList(data);
+                  } else if (state is TvshowsError) {
+                    return Text(state.message);
+                  } else {
+                    return const Center();
+                  }
+                },
+              ),
               _buildSubHeading(
                 title: 'Popular',
                 onTap: () =>
                     Navigator.pushNamed(context, PopularTvshowsPage.ROUTE_NAME),
               ),
-              Consumer<TvshowListNotifier>(builder: (context, data, child) {
-                final state = data.popularTvshowsState;
-                if (state == RequestState.Loading) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state == RequestState.Loaded) {
-                  return TvshowList(data.popularTvshows);
-                } else {
-                  return Text('Failed');
-                }
-              }),
+              BlocBuilder<PopularTvshowsBloc, TvshowsState>(
+                builder: (context, state) {
+                  if (state is TvshowsLoading) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (state is TvshowsHasData) {
+                    final data = state.result;
+                    return TvshowList(data);
+                  } else if (state is TvshowsError) {
+                    return Text(state.message);
+                  } else {
+                    return Center(
+                      child: Text('Empty'),
+                    );
+                  }
+                },
+              ),
               _buildSubHeading(
                 title: 'Top Rated',
                 onTap: () => Navigator.pushNamed(
                     context, TopRatedTvshowsPage.ROUTE_NAME),
               ),
-              Consumer<TvshowListNotifier>(builder: (context, data, child) {
-                final state = data.topRatedTvshowsState;
-                if (state == RequestState.Loading) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state == RequestState.Loaded) {
-                  return TvshowList(data.topRatedTvshows);
-                } else {
-                  return Text('Failed');
-                }
-              }),
+              BlocBuilder<TopRatedTvshowsBloc, TvshowsState>(
+                builder: (context, state) {
+                  if (state is TvshowsLoading) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (state is TvshowsHasData) {
+                    final data = state.result;
+                    return TvshowList(data);
+                  } else if (state is TvshowsError) {
+                    return Text(state.message);
+                  } else {
+                    return Center(
+                      child: Text('Empty'),
+                    );
+                  }
+                },
+              ),
             ],
           ),
         ),

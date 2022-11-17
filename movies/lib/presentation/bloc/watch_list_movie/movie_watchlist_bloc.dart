@@ -37,7 +37,7 @@ class WatchListMovieBloc
       },
     );
 
-    on<SaveWatchistMovie>((event, emit) async {
+    on<SaveWatchlistMovie>((event, emit) async {
       final movie = event.movie;
       emit(MovieWatchlistLoading());
       final result = await saveWatchlist.execute(movie);

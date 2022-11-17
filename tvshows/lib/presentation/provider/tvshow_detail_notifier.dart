@@ -15,14 +15,14 @@ class TvshowDetailNotifier extends ChangeNotifier {
 
   final GetTvshowDetail getTvshowDetail;
   final GetTvshowRecommendations getTvshowRecommendations;
-  final GetWatchListStatusTvshow getWatchListStatusTvshow;
-  final SaveWatchlistTvshow saveWatchlistTvshow;
-  final RemoveWatchlistTvshow removeWatchlistTvshow;
+  final GetWatchlistStatusTv getWatchlistStatusTvshow;
+  final SaveWatchlistTv saveWatchlistTvshow;
+  final RemoveWatchlistTv removeWatchlistTvshow;
 
   TvshowDetailNotifier({
     required this.getTvshowDetail,
     required this.getTvshowRecommendations,
-    required this.getWatchListStatusTvshow,
+    required this.getWatchlistStatusTvshow,
     required this.saveWatchlistTvshow,
     required this.removeWatchlistTvshow,
   });
@@ -110,7 +110,7 @@ class TvshowDetailNotifier extends ChangeNotifier {
   }
 
   Future<void> loadWatchlistStatus(int id) async {
-    final result = await getWatchListStatusTvshow.execute(id);
+    final result = await getWatchlistStatusTvshow.execute(id);
     _isAddedtoWatchlist = result;
     notifyListeners();
   }

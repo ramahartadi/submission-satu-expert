@@ -9,10 +9,10 @@ abstract class MovieWatchlistEvent extends Equatable {
 
 class FetchMovieWatchlistEvent extends MovieWatchlistEvent {}
 
-class SaveWatchistMovie extends MovieWatchlistEvent {
+class SaveWatchlistMovie extends MovieWatchlistEvent {
   final MovieDetail movie;
 
-  const SaveWatchistMovie(this.movie);
+  const SaveWatchlistMovie(this.movie);
   @override
   List<Object> get props => [movie];
 }
