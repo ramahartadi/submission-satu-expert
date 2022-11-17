@@ -4,7 +4,7 @@ import 'package:core/domain/entities/tvshow/tvshow.dart';
 import 'package:core/utils/routes.dart';
 import 'package:core/presentation/pages/tvshow/tvshow_detail_page.dart';
 import 'package:core/presentation/pages/tvshow/popular_tvshows_page.dart';
-import 'package:core/presentation/pages/tvshow/search_page_tvshow.dart';
+// import '../../../../../search/lib/presentation/pages/search_page_tvshow.dart';
 import 'package:core/presentation/pages/tvshow/top_rated_tvshows_page.dart';
 import 'package:core/presentation/pages/tvshow/watchlist_tvshows_page.dart';
 import 'package:core/presentation/provider/tvshow/tvshow_list_notifier.dart';
@@ -85,7 +85,7 @@ class _HomeTvshowPageState extends State<HomeTvshowPage> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, SearchPageTvshow.ROUTE_NAME);
+              Navigator.pushNamed(context, TVSHOW_SEARCH_ROUTE);
             },
             icon: Icon(Icons.search),
           )

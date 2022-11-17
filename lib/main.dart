@@ -10,20 +10,21 @@ import 'package:movies/presentation/bloc/watch_list_movie/movie_watchlist_bloc.d
 import 'package:movies/presentation/pages/movie_detail_page.dart';
 import 'package:movies/presentation/pages/home_movie_page.dart';
 import 'package:movies/presentation/pages/popular_movies_page.dart';
+import 'package:search/presentation/bloc/search_bloc_tvshow.dart';
 import 'package:search/search.dart';
 import 'package:movies/presentation/pages/top_rated_movies_page.dart';
 import 'package:core/presentation/pages/tvshow/home_tvshow_page.dart';
 import 'package:core/presentation/pages/tvshow/on_the_air_tvshows_page.dart';
 import 'package:core/presentation/pages/tvshow/popular_tvshows_page.dart';
-import 'package:core/presentation/pages/tvshow/search_page_tvshow.dart';
+// import 'package:core/presentation/pages/tvshow/search_page_tvshow.dart';
 import 'package:core/presentation/pages/tvshow/top_rated_tvshows_page.dart';
 import 'package:core/presentation/pages/tvshow/tvshow_detail_page.dart';
 import 'package:core/presentation/pages/tvshow/watchlist_tvshows_page.dart';
 import 'package:movies/presentation/pages/watchlist_movies_page.dart';
-import 'package:movies/presentation/provider/movie_detail_notifier.dart';
-import 'package:movies/presentation/provider/movie_list_notifier.dart';
-import 'package:movies/presentation/provider/popular_movies_notifier.dart';
-import 'package:movies/presentation/provider/top_rated_movies_notifier.dart';
+// import 'package:movies/presentation/provider/movie_detail_notifier.dart';
+// import 'package:movies/presentation/provider/movie_list_notifier.dart';
+// import 'package:movies/presentation/provider/popular_movies_notifier.dart';
+// import 'package:movies/presentation/provider/top_rated_movies_notifier.dart';
 import 'package:core/presentation/provider/tvshow/on_the_air_tvshows_notifier.dart';
 import 'package:core/presentation/provider/tvshow/popular_tvshows_notifier.dart';
 import 'package:core/presentation/provider/tvshow/top_rated_tvshows_notifier.dart';
@@ -31,7 +32,7 @@ import 'package:core/presentation/provider/tvshow/tvshow_detail_notifier.dart';
 import 'package:core/presentation/provider/tvshow/tvshow_list_notifier.dart';
 import 'package:core/presentation/provider/tvshow/tvshow_search_notifier.dart';
 import 'package:core/presentation/provider/tvshow/watchlist_tvshow_notifier.dart';
-import 'package:movies/presentation/provider/watchlist_movie_notifier.dart';
+// import 'package:movies/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -86,8 +87,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => di.locator<TvshowDetailNotifier>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TvshowSearchNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<SearchBlocTvshow>(),
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<OnTheAirTvshowsNotifier>(),

@@ -1,4 +1,6 @@
-part of 'search_bloc.dart';
+import 'package:core/domain/entities/tvshow/tvshow.dart';
+import 'package:equatable/equatable.dart';
+import 'package:movies/domain/entities/movie.dart';
 
 abstract class SearchState extends Equatable {
   const SearchState();
@@ -27,4 +29,13 @@ class SearchHasData extends SearchState {
 
   @override
   List<Object> get props => [result];
+}
+
+class SearchHasDataTvshow extends SearchState {
+  final List<Tvshow> resultTvshow;
+
+  SearchHasDataTvshow(this.resultTvshow);
+
+  @override
+  List<Object> get props => [resultTvshow];
 }

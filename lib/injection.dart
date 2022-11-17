@@ -20,6 +20,7 @@ import 'package:movies/presentation/bloc/list_movies/top_rated_movies_bloc.dart'
 import 'package:movies/presentation/bloc/movie_detail/movie_detail_bloc.dart';
 import 'package:movies/presentation/bloc/movie_recommendation/movie_recommendation_bloc.dart';
 import 'package:movies/presentation/bloc/watch_list_movie/movie_watchlist_bloc.dart';
+import 'package:search/presentation/bloc/search_bloc_tvshow.dart';
 import 'package:search/search.dart';
 
 import 'package:core/domain/usecases/tvshow/get_tvshow_detail.dart';
@@ -31,7 +32,7 @@ import 'package:core/domain/usecases/tvshow/get_watchlist_tvshows.dart';
 import 'package:core/domain/usecases/tvshow/get_watchlist_status_tvshows.dart';
 import 'package:core/domain/usecases/tvshow/remove_watchlist_tvshow.dart';
 import 'package:core/domain/usecases/tvshow/save_watchlist_tvshow.dart';
-import 'package:core/domain/usecases/tvshow/search_tvshows.dart';
+// import 'package:core/domain/usecases/tvshow/search_tvshows.dart';
 
 import 'package:core/presentation/provider/tvshow/on_the_air_tvshows_notifier.dart';
 import 'package:core/presentation/provider/tvshow/popular_tvshows_notifier.dart';
@@ -87,8 +88,8 @@ void init() {
     ),
   );
   locator.registerFactory(
-    () => TvshowSearchNotifier(
-      searchTvshows: locator(),
+    () => SearchBlocTvshow(
+      locator(),
     ),
   );
   locator.registerFactory(

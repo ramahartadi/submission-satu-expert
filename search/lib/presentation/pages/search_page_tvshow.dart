@@ -1,8 +1,13 @@
 import 'package:core/core.dart';
-import 'package:core/presentation/provider/tvshow/tvshow_search_notifier.dart';
+// import 'package:core/presentation/provider/tvshow/tvshow_search_notifier.dart';
 import 'package:core/presentation/widgets/tvshow_card_list.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../bloc/search_bloc_tvshow.dart';
+import '../bloc/search_event.dart';
+import '../bloc/search_state.dart';
+// import 'package:provider/provider.dart';
 
 class SearchPageTvshow extends StatelessWidget {
   static const ROUTE_NAME = '/tvshowsearch';
@@ -19,9 +24,8 @@ class SearchPageTvshow extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextField(
-              onSubmitted: (query) {
-                Provider.of<TvshowSearchNotifier>(context, listen: false)
-                    .fetchTvshowSearch(query);
+              onChanged: (query) {
+                context.read<SearchBlocTvshow>().add(OnQueryChanged(query));
               },
               decoration: InputDecoration(
                 hintText: 'Search title',
@@ -35,22 +39,22 @@ class SearchPageTvshow extends StatelessWidget {
               'Search Result',
               style: kHeading6,
             ),
-            Consumer<TvshowSearchNotifier>(
-              builder: (context, data, child) {
-                if (data.state == RequestState.Loading) {
+            BlocBuilder<SearchBlocTvshow, SearchState>(
+              builder: (context, state) {
+                if (state is SearchLoading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (data.state == RequestState.Loaded) {
-                  final result = data.searchResult;
+                } else if (state is SearchHasDataTvshow) {
+                  final resultTvshow = state.resultTvshow;
                   return Expanded(
                     child: ListView.builder(
                       padding: const EdgeInsets.all(8),
                       itemBuilder: (context, index) {
-                        final tvshow = data.searchResult[index];
+                        final tvshow = resultTvshow[index];
                         return TvshowCard(tvshow);
                       },
-                      itemCount: result.length,
+                      itemCount: resultTvshow.length,
                     ),
                   );
                 } else {

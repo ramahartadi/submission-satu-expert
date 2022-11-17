@@ -1,6 +1,8 @@
 import 'package:movies/domain/entities/movie.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
+import 'package:search/presentation/bloc/search_event.dart';
+import 'package:search/presentation/bloc/search_state.dart';
 import 'package:search/search.dart';
 import 'search_bloc_test.mocks.dart';
 import 'package:search/presentation/bloc/search_bloc.dart';

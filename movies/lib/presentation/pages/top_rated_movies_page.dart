@@ -1,7 +1,7 @@
 import 'package:core/utils/state_enum.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/presentation/bloc/list_movies/list_movies_event.dart';
-import '../../presentation/provider/top_rated_movies_notifier.dart';
+// import '../../presentation/provider/top_rated_movies_notifier.dart';
 import '../../presentation/widgets/movie_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

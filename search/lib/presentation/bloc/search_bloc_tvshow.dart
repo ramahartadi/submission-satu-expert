@@ -1,29 +1,28 @@
-import 'package:movies/domain/entities/movie.dart';
 import 'package:search/search.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:rxdart/rxdart.dart';
 
-import 'search_event.dart';
 import 'search_state.dart';
+import 'search_event.dart';
 
-class SearchBloc extends Bloc<SearchEvent, SearchState> {
-  final SearchMovies _searchMovies;
+class SearchBlocTvshow extends Bloc<SearchEvent, SearchState> {
+  final SearchTvshows _searchTvshows;
 
-  SearchBloc(this._searchMovies) : super(SearchEmpty()) {
+  SearchBlocTvshow(this._searchTvshows) : super(SearchEmpty()) {
     on<OnQueryChanged>(
       (event, emit) async {
         final query = event.query;
 
         emit(SearchLoading());
-        final result = await _searchMovies.execute(query);
+        final result = await _searchTvshows.execute(query);
 
         result.fold(
           (failure) {
             emit(SearchError(failure.message));
           },
           (data) {
-            emit(SearchHasData(data));
+            emit(SearchHasDataTvshow(data));
           },
         );
       },
