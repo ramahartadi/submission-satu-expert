@@ -1,7 +1,7 @@
-import 'package:core/data/models/tvshow/tvshow_table.dart';
+import 'package:tvshows/data/models/tvshow_table.dart';
 import 'package:core/domain/entities/genre.dart';
-import 'package:core/domain/entities/tvshow/tvshow.dart';
-import 'package:core/domain/entities/tvshow/tvshow_detail.dart';
+import 'package:tvshows/domain/entities/tvshow.dart';
+import 'package:tvshows/domain/entities/tvshow_detail.dart';
 
 final testTvshow = Tvshow(
     posterPath: "/vC324sdfcS313vh9QXwijLIHPJp.jpg",

@@ -6,19 +6,15 @@ import 'package:movies/presentation/bloc/movie_recommendation/movie_recommendati
 import 'package:movies/presentation/bloc/watch_list_movie/movie_watchlist_bloc.dart';
 import '../../domain/entities/movie.dart';
 import '../../domain/entities/movie_detail.dart';
-// import '../../presentation/provider/movie_detail_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-// import 'package:provider/provider.dart';
 import '../../presentation/bloc/movie_detail/movie_detail_bloc.dart';
-
-import '../bloc/movie_detail/movie_detail_bloc.dart';
 
 class MovieDetailPage extends StatefulWidget {
   static const ROUTE_NAME = '/detail';
 
   final int id;
-  MovieDetailPage({required this.id});
+  MovieDetailPage({Key? key, required this.id});
 
   @override
   _MovieDetailPageState createState() => _MovieDetailPageState();
@@ -65,13 +61,17 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
               child: CircularProgressIndicator(),
             );
           } else if (state is MovieDetailHasData) {
-            final movie = state.movie;
+            // final movie = state.movie;
             return SafeArea(
               child: DetailContent(
-                movie,
+                state.movie,
                 moviesRecommendation,
                 isAddedToWatchlist,
               ),
+            );
+          } else if (state is MovieDetailHasError) {
+            return Center(
+              child: Text(state.message),
             );
           } else {
             return const Text('Failed to fetch date');
@@ -85,9 +85,10 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
 class DetailContent extends StatelessWidget {
   final MovieDetail movie;
   final List<Movie> recommendations;
-  final bool isAddedWatchlist;
+  final bool isAddedWatchlistMovie;
 
-  const DetailContent(this.movie, this.recommendations, this.isAddedWatchlist);
+  const DetailContent(
+      this.movie, this.recommendations, this.isAddedWatchlistMovie);
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +101,7 @@ class DetailContent extends StatelessWidget {
           placeholder: (context, url) => const Center(
             child: CircularProgressIndicator(),
           ),
-          errorWidget: (context, url, error) => Icon(Icons.error),
+          errorWidget: (context, url, error) => const Icon(Icons.error),
         ),
         Container(
           margin: const EdgeInsets.only(top: 48 + 8),
@@ -130,8 +131,8 @@ class DetailContent extends StatelessWidget {
                               style: kHeading5,
                             ),
                             ElevatedButton(
-                              onPressed: () async {
-                                if (!isAddedWatchlist) {
+                              onPressed: () {
+                                if (!isAddedWatchlistMovie) {
                                   BlocProvider.of<WatchListMovieBloc>(context,
                                           listen: false)
                                       .add(SaveWatchlistMovie(movie));
@@ -144,16 +145,17 @@ class DetailContent extends StatelessWidget {
                                 final state =
                                     BlocProvider.of<WatchListMovieBloc>(context)
                                         .state;
+
                                 String message = '';
 
                                 if (state is LoadWatchlistData) {
-                                  message = isAddedWatchlist
+                                  message = isAddedWatchlistMovie
                                       ? WatchListMovieBloc
                                           .watchlistRemoveSuccessMessage
                                       : WatchListMovieBloc
                                           .watchlistAddSuccessMessage;
                                 } else {
-                                  message = isAddedWatchlist == false
+                                  message = isAddedWatchlistMovie == false
                                       ? WatchListMovieBloc
                                           .watchlistAddSuccessMessage
                                       : WatchListMovieBloc
@@ -181,7 +183,7 @@ class DetailContent extends StatelessWidget {
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  isAddedWatchlist
+                                  isAddedWatchlistMovie
                                       ? const Icon(Icons.check)
                                       : const Icon(Icons.add),
                                   const Text('Watchlist'),
@@ -199,7 +201,7 @@ class DetailContent extends StatelessWidget {
                                 RatingBarIndicator(
                                   rating: movie.voteAverage / 2,
                                   itemCount: 5,
-                                  itemBuilder: (context, index) => Icon(
+                                  itemBuilder: (context, index) => const Icon(
                                     Icons.star,
                                     color: kMikadoYellow,
                                   ),

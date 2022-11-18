@@ -14,13 +14,13 @@ part 'movie_detail_event.dart';
 part 'movie_detail_state.dart';
 
 class MovieDetailBloc extends Bloc<MovieDetailEvent, MovieDetailState> {
-  final GetMovieDetail getMovieDetail;
+  final GetMovieDetail _getMovieDetail;
 
-  MovieDetailBloc(this.getMovieDetail) : super(MovieDetailLoading()) {
+  MovieDetailBloc(this._getMovieDetail) : super(MovieDetailLoading()) {
     on<FetchMovieDetailEvent>((event, emit) async {
       final id = event.id;
       emit(MovieDetailLoading());
-      final result = await getMovieDetail.execute(id);
+      final result = await _getMovieDetail.execute(id);
       result.fold((failure) {
         emit(MovieDetailHasError(failure.message));
       }, (data) {
