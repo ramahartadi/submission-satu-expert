@@ -1,7 +1,5 @@
-import 'package:core/utils/state_enum.dart';
 import 'package:core/utils/utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:tvshows/presentation/provider/watchlist_tvshow_notifier.dart';
 import 'package:tvshows/presentation/widgets/tvshow_card_list.dart';
 import 'package:flutter/material.dart';
 

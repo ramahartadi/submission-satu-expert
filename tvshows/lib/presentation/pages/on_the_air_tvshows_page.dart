@@ -1,13 +1,10 @@
-import 'package:core/utils/state_enum.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:tvshows/presentation/provider/on_the_air_tvshows_notifier.dart';
 import 'package:tvshows/presentation/widgets/tvshow_card_list.dart';
 import 'package:flutter/material.dart';
 
 import '../bloc/list_tvshows/list_tvshows_event.dart';
 import '../bloc/list_tvshows/list_tvshows_state.dart';
 import '../bloc/list_tvshows/on_the_air_tvshows_bloc.dart';
-// import 'package:provider/provider.dart';
 
 class OnTheAirTvshowsPage extends StatefulWidget {
   static const ROUTE_NAME = '/on-the-air-tvshow';

@@ -4,14 +4,12 @@ import 'package:core/domain/entities/genre.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../domain/entities/tvshow.dart';
 import '../../domain/entities/tvshow_detail.dart';
-import 'package:tvshows/presentation/provider/tvshow_detail_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import '../bloc/tvshow_detail/tvshow_detail_bloc.dart';
 import '../bloc/tvshow_recommendation/tvshow_recommendation_bloc.dart';
 import '../bloc/watch_list_tvshow/tvshow_watchlist_bloc.dart';
-// import 'package:provider/provider.dart';
 
 class TvshowDetailPage extends StatefulWidget {
   static const ROUTE_NAME = '/tvshowdetail';

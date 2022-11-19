@@ -1,6 +1,6 @@
 import 'package:core/utils/state_enum.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tvshows/presentation/provider/popular_tvshows_notifier.dart';
+// import 'package:tvshows/presentation/provider/popular_tvshows_notifier.dart';
 import 'package:tvshows/presentation/widgets/tvshow_card_list.dart';
 import 'package:flutter/material.dart';
 
