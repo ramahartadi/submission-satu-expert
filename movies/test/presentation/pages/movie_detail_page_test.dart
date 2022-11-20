@@ -47,7 +47,7 @@ void main() {
       ),
     );
   }
-
+w
   testWidgets('Page should display center progress bar when loading',
       (WidgetTester tester) async {
     when(() => movieDetailBlocHelper.state).thenReturn(MovieDetailLoading());
@@ -65,6 +65,7 @@ void main() {
 
     expect(circularProgress, findsOneWidget);
   });
+
   testWidgets(
       'Watchlist button should display + icon when movie not added to watch list',
       (WidgetTester tester) async {

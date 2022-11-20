@@ -6,7 +6,7 @@ import 'package:core/utils/exception.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
-import '../../../../test/helpers/test_helper_tvshow.mocks.dart';
+import '../../helpers/test_helper_tvshow.mocks.dart';
 import '../../../../test/json_reader.dart';
 
 void main() {
