@@ -1,4 +1,3 @@
-import 'package:movies/presentation/bloc/list_movies/list_movies_state.dart';
 import 'package:movies/presentation/bloc/movie_recommendation/movie_recommendation_bloc.dart';
 import 'package:movies/presentation/bloc/watch_list_movie/movie_watchlist_bloc.dart';
 import 'package:movies/presentation/pages/movie_detail_page.dart';
@@ -10,7 +9,6 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../dummy_data/dummy_objects.dart';
 import '../../helpers/test_helper_detail_movies_bloc.dart';
-import '../../helpers/test_helper_popular_movies_bloc.dart';
 
 void main() {
   late MovieDetailBlocHelper movieDetailBlocHelper;
@@ -47,7 +45,7 @@ void main() {
       ),
     );
   }
-w
+
   testWidgets('Page should display center progress bar when loading',
       (WidgetTester tester) async {
     when(() => movieDetailBlocHelper.state).thenReturn(MovieDetailLoading());
