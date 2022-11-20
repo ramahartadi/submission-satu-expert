@@ -9,12 +9,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import 'package:tvshows/domain/entities/tvshow.dart';
 import 'package:tvshows/domain/usecases/get_tvshow_detail.dart';
 import 'package:tvshows/domain/usecases/get_tvshow_recommendations.dart';
 import 'package:tvshows/presentation/bloc/tvshow_detail/tvshow_detail_bloc.dart';
 
-import '../../../../test/dummy_data/dummy_tvshow/dummy_objects_tvshow.dart';
+import '../../../../test/dummy_data/dummy_objects_tvshow.dart';
 import 'tvshow_detail_bloc_test.mocks.dart';
 
 @GenerateMocks([
