@@ -28,4 +28,4 @@ class WatchlistMovieStateHelper extends Fake implements MovieWatchlistState {}
 
 class WatchlistMovieBlocHelper
     extends MockBloc<MovieWatchlistEvent, MovieWatchlistState>
-    implements WatchListMovieBloc {}
+    implements WatchlistMovieBloc {}

@@ -9,18 +9,18 @@ abstract class TvshowWatchlistEvent extends Equatable {
 
 class FetchTvshowWatchlistEvent extends TvshowWatchlistEvent {}
 
-class SaveWatchlistTvshow extends TvshowWatchlistEvent {
+class SaveWatchlistTvshowEvent extends TvshowWatchlistEvent {
   final TvshowDetail tvshow;
 
-  const SaveWatchlistTvshow(this.tvshow);
+  const SaveWatchlistTvshowEvent(this.tvshow);
   @override
   List<Object> get props => [tvshow];
 }
 
-class RemoveWatchlistTvshow extends TvshowWatchlistEvent {
+class RemoveWatchlistTvshowEvent extends TvshowWatchlistEvent {
   final TvshowDetail tvshow;
 
-  const RemoveWatchlistTvshow(this.tvshow);
+  const RemoveWatchlistTvshowEvent(this.tvshow);
   @override
   List<Object> get props => [tvshow];
 }

@@ -35,7 +35,7 @@ void main() {
     return MultiBlocProvider(
       providers: [
         BlocProvider<TvshowDetailBloc>(create: (_) => tvshowDetailBlocHelper),
-        BlocProvider<WatchListTvshowBloc>(
+        BlocProvider<WatchlistTvshowBloc>(
           create: (_) => watchlistTvshowBlocHelper,
         ),
         BlocProvider<RecommendationTvshowBloc>(

@@ -11,17 +11,17 @@ import '../../../domain/usecases/save_watchlist.dart';
 part 'movie_watchlist_event.dart';
 part 'movie_watchlist_state.dart';
 
-class WatchListMovieBloc
+class WatchlistMovieBloc
     extends Bloc<MovieWatchlistEvent, MovieWatchlistState> {
   final GetWatchlistMovies _getWatchlistMovie;
-  final GetWatchListStatus _getWatchListStatus;
-  final SaveWatchlist _saveWatchlist;
-  final RemoveWatchlist _removeWatchlist;
+  final GetWatchlistStatusMovie _getWatchlistStatus;
+  final SaveWatchlistMovie _saveWatchlist;
+  final RemoveWatchlistMovie _removeWatchlist;
 
   static const watchlistAddSuccessMessage = 'Added to Watchlist';
   static const watchlistRemoveSuccessMessage = 'Removed from Watchlist';
 
-  WatchListMovieBloc(this._getWatchlistMovie, this._getWatchListStatus,
+  WatchlistMovieBloc(this._getWatchlistMovie, this._getWatchlistStatus,
       this._saveWatchlist, this._removeWatchlist)
       : super(MovieWatchlistEmpty()) {
     on<FetchMovieWatchlistEvent>(
@@ -37,7 +37,7 @@ class WatchListMovieBloc
       },
     );
 
-    on<SaveWatchlistMovie>((event, emit) async {
+    on<SaveWatchlistMovieEvent>((event, emit) async {
       final movie = event.movie;
       emit(MovieWatchlistLoading());
       final result = await _saveWatchlist.execute(movie);
@@ -46,7 +46,7 @@ class WatchListMovieBloc
           (message) => emit(WatchlistMovieMessage(message)));
     });
 
-    on<RemoveWatchlistMovie>((event, emit) async {
+    on<RemoveWatchlistMovieEvent>((event, emit) async {
       final movie = event.movie;
       emit(MovieWatchlistLoading());
       final result = await _removeWatchlist.execute(movie);
@@ -55,12 +55,12 @@ class WatchListMovieBloc
           (message) => emit(WatchlistMovieMessage(message)));
     });
 
-    on<LoadWatchlistMovieStatus>((event, emit) async {
+    on<LoadWatchlistMovieStatusEvent>((event, emit) async {
       final id = event.id;
       emit(MovieWatchlistLoading());
-      final result = await _getWatchListStatus.execute(id);
+      final result = await _getWatchlistStatus.execute(id);
 
-      emit(LoadWatchlistData(result));
+      emit(LoadWatchlistDataMovie(result));
     });
   }
 }

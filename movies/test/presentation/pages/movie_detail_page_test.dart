@@ -33,7 +33,7 @@ void main() {
     return MultiBlocProvider(
       providers: [
         BlocProvider<MovieDetailBloc>(create: (_) => movieDetailBlocHelper),
-        BlocProvider<WatchListMovieBloc>(
+        BlocProvider<WatchlistMovieBloc>(
           create: (_) => watchlistMovieBlocHelper,
         ),
         BlocProvider<RecommendationMovieBloc>(
@@ -72,7 +72,7 @@ void main() {
     when(() => recommendationsMovieBlocHelper.state)
         .thenReturn(MoviesRecommendationHasData(testMovieList));
     when(() => watchlistMovieBlocHelper.state)
-        .thenReturn(LoadWatchlistData(false));
+        .thenReturn(LoadWatchlistDataMovie(false));
 
     final watchListButtonIcon = find.byIcon(Icons.add);
 
@@ -90,7 +90,7 @@ void main() {
     when(() => recommendationsMovieBlocHelper.state)
         .thenReturn(MoviesRecommendationHasData(testMovieList));
     when(() => watchlistMovieBlocHelper.state)
-        .thenReturn(LoadWatchlistData(true));
+        .thenReturn(LoadWatchlistDataMovie(true));
 
     final watchListButtonIcon = find.byIcon(Icons.check);
 

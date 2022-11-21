@@ -27,8 +27,8 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
     Future.microtask(() {
       BlocProvider.of<MovieDetailBloc>(context)
           .add(FetchMovieDetailEvent((widget.id)));
-      BlocProvider.of<WatchListMovieBloc>(context)
-          .add(LoadWatchlistMovieStatus(widget.id));
+      BlocProvider.of<WatchlistMovieBloc>(context)
+          .add(LoadWatchlistMovieStatusEvent(widget.id));
       BlocProvider.of<RecommendationMovieBloc>(context)
           .add(FetchMoviesRecommendationEvent(widget.id));
     });
@@ -45,12 +45,11 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
       return [];
     });
 
-    var isAddedToWatchlist = context.select<WatchListMovieBloc, bool>((value) {
-      var state = value.state;
-      if (state is LoadWatchlistData) {
-        return state.status;
+    var isAddedToWatchlist = context.select<WatchlistMovieBloc, bool>((value) {
+      if (value.state is LoadWatchlistDataMovie) {
+        return (value.state as LoadWatchlistDataMovie).status;
       }
-      return false;
+      return true;
     });
 
     return Scaffold(
@@ -133,43 +132,51 @@ class DetailContent extends StatelessWidget {
                             ElevatedButton(
                               onPressed: () {
                                 if (!isAddedWatchlistMovie) {
-                                  BlocProvider.of<WatchListMovieBloc>(context,
+                                  BlocProvider.of<WatchlistMovieBloc>(context,
                                           listen: false)
-                                      .add(SaveWatchlistMovie(movie));
+                                      .add(SaveWatchlistMovieEvent(movie));
                                 } else {
-                                  BlocProvider.of<WatchListMovieBloc>(context,
+                                  BlocProvider.of<WatchlistMovieBloc>(context,
                                           listen: false)
-                                      .add(RemoveWatchlistMovie(movie));
+                                      .add(RemoveWatchlistMovieEvent(movie));
                                 }
 
                                 final state =
-                                    BlocProvider.of<WatchListMovieBloc>(context)
+                                    BlocProvider.of<WatchlistMovieBloc>(context)
                                         .state;
 
                                 String message = '';
 
-                                if (state is LoadWatchlistData) {
+                                if (state is LoadWatchlistDataMovie) {
                                   message = isAddedWatchlistMovie
-                                      ? WatchListMovieBloc
+                                      ? WatchlistMovieBloc
                                           .watchlistRemoveSuccessMessage
-                                      : WatchListMovieBloc
+                                      : WatchlistMovieBloc
                                           .watchlistAddSuccessMessage;
                                 } else {
                                   message = isAddedWatchlistMovie == false
-                                      ? WatchListMovieBloc
+                                      ? WatchlistMovieBloc
                                           .watchlistAddSuccessMessage
-                                      : WatchListMovieBloc
+                                      : WatchlistMovieBloc
                                           .watchlistRemoveSuccessMessage;
                                 }
 
                                 if (message ==
-                                        WatchListMovieBloc
+                                        WatchlistMovieBloc
                                             .watchlistAddSuccessMessage ||
                                     message ==
-                                        WatchListMovieBloc
+                                        WatchlistMovieBloc
                                             .watchlistRemoveSuccessMessage) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text(message)));
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(SnackBar(
+                                          duration: Duration(milliseconds: 500),
+                                          content: Text(
+                                            message,
+                                          )));
+                                  //LOAD NEW STATUS
+                                  BlocProvider.of<WatchlistMovieBloc>(context)
+                                      .add(LoadWatchlistMovieStatusEvent(
+                                          movie.id));
                                 } else {
                                   showDialog(
                                       context: context,

@@ -15,25 +15,29 @@ import 'package:tvshows/presentation/bloc/watch_list_tvshow/tvshow_watchlist_blo
 
 import 'tvshow_watchlist_bloc_test.mocks.dart';
 
-@GenerateMocks(
-    [GetWatchlistTv, GetWatchlistStatusTv, RemoveWatchlistTv, SaveWatchlistTv])
+@GenerateMocks([
+  GetWatchlistTvshow,
+  GetWatchlistStatusTvshow,
+  RemoveWatchlistTvshow,
+  SaveWatchlistTvshow
+])
 void main() {
-  late WatchListTvshowBloc watchlistTvshowBloc;
+  late WatchlistTvshowBloc watchlistTvshowBloc;
   late MockGetWatchlistTvshows mockGetWatchlistTvshows;
-  late MockGetWatchListStatus mockGetWatchListStatus;
-  late MockRemoveWatchlist mockRemoveWatchlistTvshows;
-  late MockSaveWatchlist mockSaveWatchlistTvshows;
+  late MockGetWatchlistStatusTvshow mockGetWatchlistStatus;
+  late MockRemoveWatchlistTvshow mockRemoveWatchlistTvshows;
+  late MockSaveWatchlistTvshow mockSaveWatchlistTvshows;
 
   setUp(() {
     mockGetWatchlistTvshows = MockGetWatchlistTvshows();
-    mockGetWatchListStatus = MockGetWatchListStatus();
-    mockRemoveWatchlistTvshows = MockRemoveWatchlist();
-    mockSaveWatchlistTvshows = MockSaveWatchlist();
+    mockGetWatchlistStatus = MockGetWatchlistStatusTvshow();
+    mockRemoveWatchlistTvshows = MockRemoveWatchlistTvshow();
+    mockSaveWatchlistTvshows = MockSaveWatchlistTvshow();
 
     mockGetWatchlistTvshows = MockGetWatchlistTvshows();
-    watchlistTvshowBloc = WatchListTvshowBloc(
+    watchlistTvshowBloc = WatchlistTvshowBloc(
         mockGetWatchlistTvshows,
-        mockGetWatchListStatus,
+        mockGetWatchlistStatus,
         mockSaveWatchlistTvshows,
         mockRemoveWatchlistTvshows);
   });
@@ -86,8 +90,8 @@ void main() {
     expect(watchlistTvshowBloc.state, TvshowWatchlistEmpty());
   });
 
-  blocTest<WatchListTvshowBloc, TvshowWatchlistState>(
-    'should emit WatchListTvshowHasData when data is gotten successfully',
+  blocTest<WatchlistTvshowBloc, TvshowWatchlistState>(
+    'should emit WatchlistTvshowHasData when data is gotten successfully',
     // arrange
     build: () {
       when(mockGetWatchlistTvshows.execute())
@@ -96,7 +100,7 @@ void main() {
     },
 
     // act
-    act: (WatchListTvshowBloc bloc) => bloc.add(FetchTvshowWatchlistEvent()),
+    act: (WatchlistTvshowBloc bloc) => bloc.add(FetchTvshowWatchlistEvent()),
     // assert
     expect: () => <TvshowWatchlistState>[
       TvshowWatchlistLoading(),
@@ -105,8 +109,8 @@ void main() {
     verify: (bloc) => verify(mockGetWatchlistTvshows.execute()),
   );
 
-  blocTest<WatchListTvshowBloc, TvshowWatchlistState>(
-    'should emit WatchListTvshowError when data is get unsuccessful',
+  blocTest<WatchlistTvshowBloc, TvshowWatchlistState>(
+    'should emit WatchlistTvshowError when data is get unsuccessful',
     // arrange
     build: () {
       when(mockGetWatchlistTvshows.execute())
@@ -115,7 +119,7 @@ void main() {
     },
 
     // act
-    act: (WatchListTvshowBloc bloc) => bloc.add(FetchTvshowWatchlistEvent()),
+    act: (WatchlistTvshowBloc bloc) => bloc.add(FetchTvshowWatchlistEvent()),
     // assert
     expect: () => <TvshowWatchlistState>[
       TvshowWatchlistLoading(),
@@ -125,68 +129,68 @@ void main() {
   );
 
   group('Load Watchlist Tvshow', () {
-    blocTest<WatchListTvshowBloc, TvshowWatchlistState>(
-      'should emit TvshowLoadWatchListData when data is gotten successfully',
+    blocTest<WatchlistTvshowBloc, TvshowWatchlistState>(
+      'should emit TvshowLoadWatchlistData when data is gotten successfully',
       // arrange
       build: () {
-        when(mockGetWatchListStatus.execute(tId)).thenAnswer((_) async => true);
+        when(mockGetWatchlistStatus.execute(tId)).thenAnswer((_) async => true);
         return watchlistTvshowBloc;
       },
 
       // act
-      act: (WatchListTvshowBloc bloc) =>
+      act: (WatchlistTvshowBloc bloc) =>
           bloc.add(LoadWatchlistTvshowStatus(tId)),
       // assert
       expect: () => <TvshowWatchlistState>[
         TvshowWatchlistLoading(),
         LoadWatchlistData(true),
       ],
-      verify: (bloc) => verify(mockGetWatchListStatus.execute(tId)),
+      verify: (bloc) => verify(mockGetWatchlistStatus.execute(tId)),
     );
 
-    blocTest<WatchListTvshowBloc, TvshowWatchlistState>(
+    blocTest<WatchlistTvshowBloc, TvshowWatchlistState>(
       'should emit TvshowLoadWatchlistError when data is get unsuccessful',
       // arrange
       build: () {
-        when(mockGetWatchListStatus.execute(tId))
+        when(mockGetWatchlistStatus.execute(tId))
             .thenAnswer((_) async => false);
         return watchlistTvshowBloc;
       },
 
       // act
-      act: (WatchListTvshowBloc bloc) =>
+      act: (WatchlistTvshowBloc bloc) =>
           bloc.add(LoadWatchlistTvshowStatus(tId)),
       // assert
       expect: () => <TvshowWatchlistState>[
         TvshowWatchlistLoading(),
         LoadWatchlistData(false),
       ],
-      verify: (bloc) => verify(mockGetWatchListStatus.execute(tId)),
+      verify: (bloc) => verify(mockGetWatchlistStatus.execute(tId)),
     );
   });
 
   group('Save Watchlist Tvshow', () {
-    blocTest<WatchListTvshowBloc, TvshowWatchlistState>(
-      'should emit TvshowSaveWatchListData when data is gotten successfully',
+    blocTest<WatchlistTvshowBloc, TvshowWatchlistState>(
+      'should emit TvshowSaveWatchlistData when data is gotten successfully',
       // arrange
       build: () {
         when(mockSaveWatchlistTvshows.execute(tTvshowDetail)).thenAnswer(
-            (_) async => Right(WatchListTvshowBloc.watchlistAddSuccessMessage));
+            (_) async => Right(WatchlistTvshowBloc.watchlistAddSuccessMessage));
         return watchlistTvshowBloc;
       },
 
       // act
-      act: (WatchListTvshowBloc bloc) =>
-          bloc.add(SaveWatchlistTvshow(tTvshowDetail)),
+      act: (WatchlistTvshowBloc bloc) =>
+          bloc.add(SaveWatchlistTvshowEvent(tTvshowDetail)),
       // assert
       expect: () => <TvshowWatchlistState>[
         TvshowWatchlistLoading(),
-        WatchlistTvshowMessage(WatchListTvshowBloc.watchlistAddSuccessMessage),
+        WatchlistTvshowMessage(WatchlistTvshowBloc.watchlistAddSuccessMessage),
       ],
       verify: (bloc) => verify(mockSaveWatchlistTvshows.execute(tTvshowDetail)),
     );
 
-    blocTest<WatchListTvshowBloc, TvshowWatchlistState>(
+    blocTest<WatchlistTvshowBloc, TvshowWatchlistState>(
       'should emit TvshowSaveWatchlistError when data is gotten successfully',
       // arrange
       build: () {
@@ -196,8 +200,8 @@ void main() {
       },
 
       // act
-      act: (WatchListTvshowBloc bloc) =>
-          bloc.add(SaveWatchlistTvshow(tTvshowDetail)),
+      act: (WatchlistTvshowBloc bloc) =>
+          bloc.add(SaveWatchlistTvshowEvent(tTvshowDetail)),
       // assert
       expect: () => <TvshowWatchlistState>[
         TvshowWatchlistLoading(),
@@ -208,28 +212,28 @@ void main() {
   });
 
   group('Remove Watchlist Tvshow', () {
-    blocTest<WatchListTvshowBloc, TvshowWatchlistState>(
-      'should emit TvshowRemoveWatchListData when data is gotten successfully',
+    blocTest<WatchlistTvshowBloc, TvshowWatchlistState>(
+      'should emit TvshowRemoveWatchlistData when data is gotten successfully',
       // arrange
       build: () {
         when(mockRemoveWatchlistTvshows.execute(tTvshowDetail)).thenAnswer(
-            (_) async => Right(WatchListTvshowBloc.watchlistAddSuccessMessage));
+            (_) async => Right(WatchlistTvshowBloc.watchlistAddSuccessMessage));
         return watchlistTvshowBloc;
       },
 
       // act
-      act: (WatchListTvshowBloc bloc) =>
-          bloc.add(RemoveWatchlistTvshow(tTvshowDetail)),
+      act: (WatchlistTvshowBloc bloc) =>
+          bloc.add(RemoveWatchlistTvshowEvent(tTvshowDetail)),
       // assert
       expect: () => <TvshowWatchlistState>[
         TvshowWatchlistLoading(),
-        WatchlistTvshowMessage(WatchListTvshowBloc.watchlistAddSuccessMessage),
+        WatchlistTvshowMessage(WatchlistTvshowBloc.watchlistAddSuccessMessage),
       ],
       verify: (bloc) =>
           verify(mockRemoveWatchlistTvshows.execute(tTvshowDetail)),
     );
 
-    blocTest<WatchListTvshowBloc, TvshowWatchlistState>(
+    blocTest<WatchlistTvshowBloc, TvshowWatchlistState>(
       'should emit TvshowRemoveWatchlistError when data is gotten successfully',
       // arrange
       build: () {
@@ -239,8 +243,8 @@ void main() {
       },
 
       // act
-      act: (WatchListTvshowBloc bloc) =>
-          bloc.add(RemoveWatchlistTvshow(tTvshowDetail)),
+      act: (WatchlistTvshowBloc bloc) =>
+          bloc.add(RemoveWatchlistTvshowEvent(tTvshowDetail)),
       // assert
       expect: () => <TvshowWatchlistState>[
         TvshowWatchlistLoading(),

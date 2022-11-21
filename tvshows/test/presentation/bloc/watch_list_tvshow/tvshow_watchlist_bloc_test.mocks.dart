@@ -52,7 +52,8 @@ class _FakeTvshowRepository_1 extends _i1.SmartFake
 /// A class which mocks [GetWatchlistTvshows].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockGetWatchlistTvshows extends _i1.Mock implements _i4.GetWatchlistTv {
+class MockGetWatchlistTvshows extends _i1.Mock
+    implements _i4.GetWatchlistTvshow {
   MockGetWatchlistTvshows() {
     _i1.throwOnMissingStub(this);
   }
@@ -76,12 +77,12 @@ class MockGetWatchlistTvshows extends _i1.Mock implements _i4.GetWatchlistTv {
       ) as _i5.Future<_i2.Either<_i6.Failure, List<_i7.Tvshow>>>);
 }
 
-/// A class which mocks [GetWatchListStatus].
+/// A class which mocks [GetWatchlistStatusTvshow].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockGetWatchListStatus extends _i1.Mock
-    implements _i8.GetWatchlistStatusTv {
-  MockGetWatchListStatus() {
+class MockGetWatchlistStatusTvshow extends _i1.Mock
+    implements _i8.GetWatchlistStatusTvshow {
+  MockGetWatchlistStatus() {
     _i1.throwOnMissingStub(this);
   }
 
@@ -103,10 +104,11 @@ class MockGetWatchListStatus extends _i1.Mock
       ) as _i5.Future<bool>);
 }
 
-/// A class which mocks [RemoveWatchlist].
+/// A class which mocks [RemoveWatchlistTvshow].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockRemoveWatchlist extends _i1.Mock implements _i9.RemoveWatchlistTv {
+class MockRemoveWatchlistTvshow extends _i1.Mock
+    implements _i9.RemoveWatchlistTvshow {
   MockRemoveWatchlist() {
     _i1.throwOnMissingStub(this);
   }
@@ -138,10 +140,11 @@ class MockRemoveWatchlist extends _i1.Mock implements _i9.RemoveWatchlistTv {
       ) as _i5.Future<_i2.Either<_i6.Failure, String>>);
 }
 
-/// A class which mocks [SaveWatchlist].
+/// A class which mocks [SaveWatchlistTvshow].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSaveWatchlist extends _i1.Mock implements _i11.SaveWatchlistTv {
+class MockSaveWatchlistTvshow extends _i1.Mock
+    implements _i11.SaveWatchlistTvshow {
   MockSaveWatchlist() {
     _i1.throwOnMissingStub(this);
   }

@@ -68,7 +68,7 @@ class MyApp extends StatelessWidget {
           create: (_) => di.locator<PopularMoviesBloc>(),
         ),
         BlocProvider(
-          create: (_) => di.locator<WatchListMovieBloc>(),
+          create: (_) => di.locator<WatchlistMovieBloc>(),
         ),
         BlocProvider(
           create: (_) => di.locator<RecommendationMovieBloc>(),
@@ -92,7 +92,7 @@ class MyApp extends StatelessWidget {
           create: (_) => di.locator<PopularTvshowsBloc>(),
         ),
         BlocProvider(
-          create: (_) => di.locator<WatchListTvshowBloc>(),
+          create: (_) => di.locator<WatchlistTvshowBloc>(),
         ),
       ],
       child: MaterialApp(

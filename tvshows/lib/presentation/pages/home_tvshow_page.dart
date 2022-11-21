@@ -51,9 +51,11 @@ class _HomeTvshowPageState extends State<HomeTvshowPage> {
             ),
             ListTile(
               leading: Icon(Icons.movie),
-              title: Text('Tvshows'),
+              title: Text('Movies'),
               onTap: () {
-                Navigator.pushNamed(context, '/home');
+                Navigator.pop(context);
+                Navigator.pop(context);
+                Navigator.pop(context);
               },
             ),
             ListTile(
@@ -67,7 +69,7 @@ class _HomeTvshowPageState extends State<HomeTvshowPage> {
               leading: Icon(Icons.save_alt),
               title: Text('Watchlist'),
               onTap: () {
-                Navigator.pushNamed(context, WatchlistTvshowsPage.ROUTE_NAME);
+                Navigator.pushNamed(context, MOVIE_WATCHLIST_ROUTE);
               },
             ),
             ListTile(

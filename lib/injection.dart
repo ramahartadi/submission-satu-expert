@@ -65,10 +65,10 @@ void init() {
   locator.registerFactory(() => TopRatedMoviesBloc(locator()));
   locator.registerFactory(() => TopRatedTvshowsBloc(locator()));
   locator.registerFactory(
-    () => WatchListMovieBloc(locator(), locator(), locator(), locator()),
+    () => WatchlistMovieBloc(locator(), locator(), locator(), locator()),
   );
   locator.registerFactory(
-    () => WatchListTvshowBloc(locator(), locator(), locator(), locator()),
+    () => WatchlistTvshowBloc(locator(), locator(), locator(), locator()),
   );
 
   // use case
@@ -78,9 +78,9 @@ void init() {
   locator.registerLazySingleton(() => GetMovieDetail(locator()));
   locator.registerLazySingleton(() => GetMovieRecommendations(locator()));
   locator.registerLazySingleton(() => SearchMovies(locator()));
-  locator.registerLazySingleton(() => GetWatchListStatus(locator()));
-  locator.registerLazySingleton(() => SaveWatchlist(locator()));
-  locator.registerLazySingleton(() => RemoveWatchlist(locator()));
+  locator.registerLazySingleton(() => GetWatchlistStatusMovie(locator()));
+  locator.registerLazySingleton(() => SaveWatchlistMovie(locator()));
+  locator.registerLazySingleton(() => RemoveWatchlistMovie(locator()));
   locator.registerLazySingleton(() => GetWatchlistMovies(locator()));
 
   locator.registerLazySingleton(() => GetOnTheAirTvshows(locator()));
@@ -89,10 +89,10 @@ void init() {
   locator.registerLazySingleton(() => GetTvshowDetail(locator()));
   locator.registerLazySingleton(() => GetTvshowRecommendations(locator()));
   locator.registerLazySingleton(() => SearchTvshows(locator()));
-  locator.registerLazySingleton(() => GetWatchlistStatusTv(locator()));
-  locator.registerLazySingleton(() => SaveWatchlistTv(locator()));
-  locator.registerLazySingleton(() => RemoveWatchlistTv(locator()));
-  locator.registerLazySingleton(() => GetWatchlistTv(locator()));
+  locator.registerLazySingleton(() => GetWatchlistStatusTvshow(locator()));
+  locator.registerLazySingleton(() => SaveWatchlistTvshow(locator()));
+  locator.registerLazySingleton(() => RemoveWatchlistTvshow(locator()));
+  locator.registerLazySingleton(() => GetWatchlistTvshow(locator()));
 
   // repository
   locator.registerLazySingleton<MovieRepository>(

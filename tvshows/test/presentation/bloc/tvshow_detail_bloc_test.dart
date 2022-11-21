@@ -1,9 +1,9 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:core/utils/failure.dart';
-import 'package:movies/domain/usecases/get_watchlist_status.dart';
-import 'package:movies/domain/usecases/remove_watchlist.dart';
-import 'package:movies/domain/usecases/save_watchlist.dart';
+import 'package:tvshows/domain/usecases/get_watchlist_status_tvshows.dart';
+import 'package:tvshows/domain/usecases/remove_watchlist_tvshow.dart';
+import 'package:tvshows/domain/usecases/save_watchlist_tvshow.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -19,9 +19,9 @@ import 'tvshow_detail_bloc_test.mocks.dart';
 @GenerateMocks([
   GetTvshowDetail,
   GetTvshowRecommendations,
-  GetWatchListStatus,
-  SaveWatchlist,
-  RemoveWatchlist,
+  GetWatchlistStatusTvshow,
+  SaveWatchlistTvshow,
+  RemoveWatchlistTvshow,
 ])
 void main() {
   late TvshowDetailBloc movieDetailBloc;

@@ -11,17 +11,17 @@ import '../../../domain/usecases/get_watchlist_tvshows.dart';
 part 'tvshow_watchlist_event.dart';
 part 'tvshow_watchlist_state.dart';
 
-class WatchListTvshowBloc
+class WatchlistTvshowBloc
     extends Bloc<TvshowWatchlistEvent, TvshowWatchlistState> {
-  final GetWatchlistTv getWatchlistTvshow;
-  final GetWatchlistStatusTv getWatchListStatusTvshow;
-  final SaveWatchlistTv saveWatchlistTvshow;
-  final RemoveWatchlistTv removeWatchlistTvshow;
+  final GetWatchlistTvshow getWatchlistTvshow;
+  final GetWatchlistStatusTvshow getWatchlistStatusTvshow;
+  final SaveWatchlistTvshow saveWatchlistTvshow;
+  final RemoveWatchlistTvshow removeWatchlistTvshow;
 
   static const watchlistAddSuccessMessage = 'Added to Watchlist';
   static const watchlistRemoveSuccessMessage = 'Removed from Watchlist';
 
-  WatchListTvshowBloc(this.getWatchlistTvshow, this.getWatchListStatusTvshow,
+  WatchlistTvshowBloc(this.getWatchlistTvshow, this.getWatchlistStatusTvshow,
       this.saveWatchlistTvshow, this.removeWatchlistTvshow)
       : super(TvshowWatchlistEmpty()) {
     on<FetchTvshowWatchlistEvent>(
@@ -37,7 +37,7 @@ class WatchListTvshowBloc
       },
     );
 
-    on<SaveWatchlistTvshow>((event, emit) async {
+    on<SaveWatchlistTvshowEvent>((event, emit) async {
       final tvshow = event.tvshow;
       emit(TvshowWatchlistLoading());
       final result = await saveWatchlistTvshow.execute(tvshow);
@@ -46,7 +46,7 @@ class WatchListTvshowBloc
           (r) => emit(WatchlistTvshowMessage(r)));
     });
 
-    on<RemoveWatchlistTvshow>((event, emit) async {
+    on<RemoveWatchlistTvshowEvent>((event, emit) async {
       final tvshow = event.tvshow;
       emit(TvshowWatchlistLoading());
       final result = await removeWatchlistTvshow.execute(tvshow);
@@ -58,7 +58,7 @@ class WatchListTvshowBloc
     on<LoadWatchlistTvshowStatus>((event, emit) async {
       final id = event.id;
       emit(TvshowWatchlistLoading());
-      final result = await getWatchListStatusTvshow.execute(id);
+      final result = await getWatchlistStatusTvshow.execute(id);
 
       emit(LoadWatchlistData(result));
     });

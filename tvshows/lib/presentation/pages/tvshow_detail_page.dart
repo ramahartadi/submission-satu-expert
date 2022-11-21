@@ -28,7 +28,7 @@ class _TvshowDetailPageState extends State<TvshowDetailPage> {
     Future.microtask(() {
       BlocProvider.of<TvshowDetailBloc>(context)
           .add(FetchTvshowDetailEvent((widget.id)));
-      BlocProvider.of<WatchListTvshowBloc>(context)
+      BlocProvider.of<WatchlistTvshowBloc>(context)
           .add(LoadWatchlistTvshowStatus(widget.id));
       BlocProvider.of<RecommendationTvshowBloc>(context)
           .add(FetchTvshowsRecommendationEvent(widget.id));
@@ -46,7 +46,7 @@ class _TvshowDetailPageState extends State<TvshowDetailPage> {
       return [];
     });
 
-    var isAddedToWatchlist = context.select<WatchListTvshowBloc, bool>((value) {
+    var isAddedToWatchlist = context.select<WatchlistTvshowBloc, bool>((value) {
       var state = value.state;
       if (state is LoadWatchlistData) {
         return state.status;
@@ -128,43 +128,51 @@ class DetailContent extends StatelessWidget {
                             ElevatedButton(
                               onPressed: () async {
                                 if (!isAddedWatchlist) {
-                                  BlocProvider.of<WatchListTvshowBloc>(context,
+                                  BlocProvider.of<WatchlistTvshowBloc>(context,
                                           listen: false)
-                                      .add(SaveWatchlistTvshow(tvshow));
+                                      .add(SaveWatchlistTvshowEvent(tvshow));
                                 } else {
-                                  BlocProvider.of<WatchListTvshowBloc>(context,
+                                  BlocProvider.of<WatchlistTvshowBloc>(context,
                                           listen: false)
-                                      .add(RemoveWatchlistTvshow(tvshow));
+                                      .add(RemoveWatchlistTvshowEvent(tvshow));
                                 }
 
                                 final state =
-                                    BlocProvider.of<WatchListTvshowBloc>(
+                                    BlocProvider.of<WatchlistTvshowBloc>(
                                             context)
                                         .state;
                                 String message = '';
 
                                 if (state is LoadWatchlistData) {
                                   message = isAddedWatchlist
-                                      ? WatchListTvshowBloc
+                                      ? WatchlistTvshowBloc
                                           .watchlistRemoveSuccessMessage
-                                      : WatchListTvshowBloc
+                                      : WatchlistTvshowBloc
                                           .watchlistAddSuccessMessage;
                                 } else {
                                   message = isAddedWatchlist == false
-                                      ? WatchListTvshowBloc
+                                      ? WatchlistTvshowBloc
                                           .watchlistAddSuccessMessage
-                                      : WatchListTvshowBloc
+                                      : WatchlistTvshowBloc
                                           .watchlistRemoveSuccessMessage;
                                 }
 
                                 if (message ==
-                                        WatchListTvshowBloc
+                                        WatchlistTvshowBloc
                                             .watchlistAddSuccessMessage ||
                                     message ==
-                                        WatchListTvshowBloc
+                                        WatchlistTvshowBloc
                                             .watchlistRemoveSuccessMessage) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text(message)));
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(SnackBar(
+                                          duration: Duration(milliseconds: 500),
+                                          content: Text(
+                                            message,
+                                          )));
+                                  //LOAD NEW STATUS
+                                  BlocProvider.of<WatchlistTvshowBloc>(context)
+                                      .add(
+                                          LoadWatchlistTvshowStatus(tvshow.id));
                                 } else {
                                   showDialog(
                                       context: context,

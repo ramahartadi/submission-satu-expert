@@ -20,7 +20,7 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
   void initState() {
     super.initState();
     Future.microtask(() {
-      BlocProvider.of<WatchListMovieBloc>(context)
+      BlocProvider.of<WatchlistMovieBloc>(context)
           .add(FetchMovieWatchlistEvent());
     });
   }
@@ -32,7 +32,7 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
   }
 
   void didPopNext() {
-    BlocProvider.of<WatchListMovieBloc>(context, listen: false)
+    BlocProvider.of<WatchlistMovieBloc>(context, listen: false)
         .add(FetchMovieWatchlistEvent());
   }
 
@@ -44,7 +44,7 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: BlocBuilder<WatchListMovieBloc, MovieWatchlistState>(
+        child: BlocBuilder<WatchlistMovieBloc, MovieWatchlistState>(
           builder: (context, state) {
             if (state is MovieWatchlistLoading) {
               return const Center(

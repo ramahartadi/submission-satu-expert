@@ -29,4 +29,4 @@ class WatchlistTvshowStateHelper extends Fake implements TvshowWatchlistState {}
 
 class WatchlistTvshowBlocHelper
     extends MockBloc<TvshowWatchlistEvent, TvshowWatchlistState>
-    implements WatchListTvshowBloc {}
+    implements WatchlistTvshowBloc {}

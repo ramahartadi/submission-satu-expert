@@ -6,3 +6,4 @@ const ABOUT_ROUTE = '/about';
 const TVSHOW_SEARCH_ROUTE = '/tvshowsearch';
 const TVSHOW_HOME_ROUTE = '/home-tvshow';
 const TVSHOW_WATCHLIST_ROUTE = '/watchlist-tvshow';
+const MOVIE_WATCHLIST_ROUTE = '/watchlist-movie';

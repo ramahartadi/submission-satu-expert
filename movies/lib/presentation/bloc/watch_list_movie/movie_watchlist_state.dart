@@ -35,10 +35,10 @@ class WatchlistMovieMessage extends MovieWatchlistState {
   const WatchlistMovieMessage(this.message);
 }
 
-class LoadWatchlistData extends MovieWatchlistState {
+class LoadWatchlistDataMovie extends MovieWatchlistState {
   final bool status;
 
-  const LoadWatchlistData(this.status);
+  const LoadWatchlistDataMovie(this.status);
 
   @override
   List<Object> get props => [status];

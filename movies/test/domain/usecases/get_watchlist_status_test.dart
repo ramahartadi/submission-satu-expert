@@ -5,12 +5,12 @@ import 'package:mockito/mockito.dart';
 import '../../../../test/helpers/test_helper.mocks.dart';
 
 void main() {
-  late GetWatchListStatus usecase;
+  late GetWatchlistStatusMovie usecase;
   late MockMovieRepository mockMovieRepository;
 
   setUp(() {
     mockMovieRepository = MockMovieRepository();
-    usecase = GetWatchListStatus(mockMovieRepository);
+    usecase = GetWatchlistStatusMovie(mockMovieRepository);
   });
 
   test('should get watchlist status from repository', () async {
