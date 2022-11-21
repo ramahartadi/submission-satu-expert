@@ -11,8 +11,8 @@ import 'package:tvshows/domain/entities/tvshow.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../../../test/dummy_data/dummy_objects_tvshow.dart';
-import '../../../../test/helpers/test_helper_tvshow.mocks.dart';
+import '../../dummy_data/dummy_objects_tvshow.dart';
+import '../../helpers/test_helper_tvshow.mocks.dart';
 
 void main() {
   late TvshowRepositoryImpl repository;

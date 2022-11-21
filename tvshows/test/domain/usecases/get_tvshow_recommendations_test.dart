@@ -4,7 +4,7 @@ import 'package:tvshows/domain/usecases/get_tvshow_recommendations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../../../test/helpers/test_helper_tvshow.mocks.dart';
+import '../../helpers/test_helper_tvshow.mocks.dart';
 
 void main() {
   late GetTvshowRecommendations usecase;
